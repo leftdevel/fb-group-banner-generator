@@ -8,7 +8,8 @@ const Photographer = async (url, fileName) => {
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  page.setViewport({ width: 820, height: 428 });
+  // double the desired size.
+  page.setViewport({ width: 820 * 2, height: 428 * 2 });
   await page.goto(url);
   await page.screenshot({ path: fileName });
   await browser.close();
