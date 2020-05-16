@@ -11,16 +11,36 @@
             }
 
             #root {
-                box-sizing: border-box;
                 background-image: url("flag.png");
                 background-size:contain;
                 background-repeat:no-repeat;
                 width: 820px;
                 height: 428px;
+                position: relative;
+                box-sizing: border-box;
+            }
+
+            #header {
+                box-sizing: border-box;
+                width: 100%;
+                height: 142.66px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 2em;
+            }
+
+            #footer {
+                box-sizing: border-box;
+                position: absolute;
+                bottom: 0;
                 display: flex;
                 flex-flow: row wrap;
-                justify-content: center;
-                padding: 40px;
+                justify-content: space-evenly;
+                width: 100%;
+                height: 142.66px;
+                align-items: center;
             }
 
             img {
@@ -34,16 +54,21 @@
     </head>
     <body>
         <div id="root">
-            <img src="/img/image-0.jpg" />
-            <img src="/img/image-1.jpg" />
-            <img src="/img/image-2.jpg" />
-            <img src="/img/image-3.jpg" />
-            <img src="/img/image-4.jpg" />
-            <img src="/img/image-5.jpg" />
-            <img src="/img/image-6.jpg" />
-            <img src="/img/image-7.jpg" />
-            <img src="/img/image-8.jpg" />
-            <img src="/img/image-9.jpg" />
+            <div id="header">
+                <h1>Desarrolladores Nicaragua</h1>
+            </div>
+            <div id="footer">
+                <img src="/img/image-0.jpg" />
+                <img src="/img/image-1.jpg" />
+                <img src="/img/image-2.jpg" />
+                <img src="/img/image-3.jpg" />
+                <img src="/img/image-4.jpg" />
+                <img src="/img/image-5.jpg" />
+                <img src="/img/image-6.jpg" />
+                <img src="/img/image-7.jpg" />
+                <img src="/img/image-8.jpg" />
+                <img src="/img/image-9.jpg" />
+            </div>
         </div>
     </body>
 </html>
