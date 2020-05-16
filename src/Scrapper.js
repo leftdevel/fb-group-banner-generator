@@ -3,11 +3,8 @@ import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
 import FsUtils from "./FsUtils";
+import Login from "./Login";
 
-const siteUrl = "https://www.facebook.com/";
-const usernameSelector = "#email";
-const passSelector = "#pass";
-const submitSelector = "#login_form input[type='submit']";
 // https://www.facebook.com/groups/197973700229538/insights/?section=members
 const groupUrl = "https://www.facebook.com/groups/197973700229538/members/";
 const imgClasses = "img._s0._4ooo.img"; // ["img", "_5_4e"];
@@ -32,23 +29,17 @@ const download = async (url, destination) => new Promise((resolve, reject) => {
 });
 
 async function Scrapper() {
-  const username = process.env.USERNAME;
-  const pass = process.env.PASS;
-
   // clear photos destination dir
   FsUtils.prepareDistDir(destinationDir);
   // Run browser
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+
   page.setViewport({ width: 1366, height: 768 });
-  await page.goto(siteUrl);
-  await page.click(usernameSelector);
-  await page.keyboard.type(username);
-  await page.click(passSelector);
-  await page.keyboard.type(pass);
-  await page.click(submitSelector);
-  await page.waitForNavigation();
+
+  await Login(page);
   await page.goto(groupUrl);
+
   const images = await page.evaluate(
     // eslint-disable-next-line no-undef
     (selector) => Array.from(document.querySelectorAll(selector), (e) => e.src),
