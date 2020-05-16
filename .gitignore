@@ -2,3 +2,4 @@ node_modules/*
 public/*
 .env
 facebook.png
+.DS_Store

@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 // import Downloader from "./src/Downloader";
-import Previewer from "./src/Previewer";
+import Previewer from "./Previewer";
 
 dotenv.config();
 

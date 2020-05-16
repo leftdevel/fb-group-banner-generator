@@ -55,11 +55,13 @@ async function Downloader() {
   );
 
   const totalPhotos = Math.min(images.length, maxPhotos);
+  const photos = [];
   const requests = [];
 
   for (let i = 0; i < totalPhotos; i += 1) {
     const destination = path.join(destinationDir, `image-${i}.jpg`);
     requests.push(download(images[i], destination));
+    photos.push(destination);
   }
 
   Promise.all(requests).catch((err) => console.log(err));
@@ -67,7 +69,7 @@ async function Downloader() {
   await page.screenshot({ path: "facebook.png" });
   await browser.close();
 
-  return totalPhotos;
+  return photos;
 }
 
 export default Downloader;
