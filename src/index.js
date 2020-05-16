@@ -1,3 +1,4 @@
+import path from "path";
 import dotenv from "dotenv";
 // import Scrapper from "./src/Scrapper";
 import Painter from "./Painter";
@@ -9,7 +10,8 @@ async function main() {
   const port = 8080;
   const server = await Painter(port);
   const serverUrl = "http://localhost:8080";
-  await Photographer(serverUrl);
+  const fileName = path.join(__dirname, "banner.jpg");
+  await Photographer(serverUrl, fileName);
   await server.close();
 }
 
