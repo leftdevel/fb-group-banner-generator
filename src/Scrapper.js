@@ -31,7 +31,7 @@ const download = async (url, destination) => new Promise((resolve, reject) => {
     });
 });
 
-async function Downloader() {
+async function Scrapper() {
   const username = process.env.USERNAME;
   const pass = process.env.PASS;
 
@@ -50,6 +50,7 @@ async function Downloader() {
   await page.waitForNavigation();
   await page.goto(groupUrl);
   const images = await page.evaluate(
+    // eslint-disable-next-line no-undef
     (selector) => Array.from(document.querySelectorAll(selector), (e) => e.src),
     imgClasses,
   );
@@ -72,4 +73,4 @@ async function Downloader() {
   return photos;
 }
 
-export default Downloader;
+export default Scrapper;

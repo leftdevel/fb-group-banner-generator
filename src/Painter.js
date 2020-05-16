@@ -4,9 +4,7 @@ import fs from "fs";
 
 const publicDir = path.join(__dirname, "..", "public");
 
-console.log(publicDir);
-
-const Previewer = (port = 9615) => {
+const Painter = (port = 9615) => {
   const index = fs.readFileSync("./assets/index.html");
 
   const server = http
@@ -39,4 +37,4 @@ const Previewer = (port = 9615) => {
   return server;
 };
 
-export default Previewer;
+export default Painter;
