@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import express from "express";
 import nunjucks from "nunjucks";
+import morgan from "morgan";
 
 const root = path.resolve(__dirname, "..");
 const templatesDir = `${root}/templates`;
@@ -18,6 +19,21 @@ const shuffle = (array) => {
   return array;
 };
 
+const readImages = (callback) => {
+  fs.readdir(imagesDir, null, (err, files) => {
+    if (err) {
+      throw err;
+    }
+
+    if (files.length === 0) {
+      throw new Error("No images found");
+    }
+
+    const images = files.map((file) => `/img/${file}`);
+    callback(images);
+  });
+};
+
 const Painter = () => {
   const host = process.env.HOST || "127.0.0.1";
   const port = process.env.PORT || 8080;
@@ -29,36 +45,19 @@ const Painter = () => {
   });
 
   app.set("view engine", "njk");
-  app.use((req, res, next) => {
-    console.log(req.url);
-    next();
-  });
+  app.use(morgan("combined"));
 
   app.get("/", (req, res) => {
-    fs.readdir(imagesDir, null, (err, files) => {
-      if (err) {
-        throw err;
-      }
-
-      if (files.length === 0) {
-        throw new Error("No images found");
-      }
-
-      const images = files.map((file) => `/img/${file}`);
-
-      res.render("banner", { images: shuffle(images) });
-    });
+    readImages((images) => res.render("banner", { images: shuffle(images) }));
   });
 
   app.use(express.static(`${root}/public`));
 
-  const logging = () => {
-    console.log("Server started", host, port);
-    console.log("Root directory", root);
-    console.log("Press Ctrl+C to exit...\n");
-  };
-
-  return app.listen(port, host, logging);
+  return app.listen(port, host, () => {
+    console.log("sever started");
+    console.log("host", host);
+    console.log("port", port);
+  });
 };
 
 export default Painter;
