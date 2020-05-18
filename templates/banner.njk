@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Desarrolladores Nicaragua</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="main.css" />
+    </head>
+    <body>
+        <div id="root">
+            <div id="header">
+                <h1>Desarrolladores Nicaragua</h1>
+            </div>
+            <div id="footer">
+                {% for src in images %}
+                    <img src="{{ src }}" />
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
